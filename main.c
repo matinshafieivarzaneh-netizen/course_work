@@ -56,9 +56,9 @@ fclose(pql);
         sum_squaredB += data[i].phaseB * data[i].phaseB;
         sum_squaredC += data[i].phaseC * data[i].phaseC;
     }
-    double rmsA = rms(1000, sum_squaredA);
-    double rmsB = rms(1000, sum_squaredB);
-    double rmsC = rms(1000, sum_squaredC);
+    double rmsA = my_rms(1000, sum_squaredA);
+    double rmsB = my_rms(1000, sum_squaredB);
+    double rmsC = my_rms(1000, sum_squaredC);
     printf("RMS volt A; %f \nRMS volt B; %f \nRMS volt C; %f \n", rmsA, rmsB, rmsC);
     rmsA = 200;
     rmsB = 200;
