@@ -1,17 +1,10 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
-typedef struct{
-    float timestamp;
-    float phaseA;
-    float phaseB;
-    float phaseC;
-    float line_current;
-    float frequency;
-    float power_factor;
-    float thd_percent;
-} pql_data;
+#include "waveform.h"
+
 int main(void) {
     FILE *pql = fopen("power_quality_log.csv", "r");
 
@@ -63,17 +56,41 @@ fclose(pql);
         sum_squaredB += data[i].phaseB * data[i].phaseB;
         sum_squaredC += data[i].phaseC * data[i].phaseC;
     }
-double meanA = sum_squaredA / 1000.0;
-    double meanB = sum_squaredB / 1000.0;
-    double meanC = sum_squaredC / 1000.0;
-    double rmsA = sqrt(meanA);
-    double rmsB = sqrt(meanB);
-    double rmsC = sqrt(meanC);
-        printf("RMS volt A; %f \nRMS volt B; %f \nRMS volt C; %f \n", rmsA, rmsB, rmsC);
+    double rmsA = rms(1000, sum_squaredA);
+    double rmsB = rms(1000, sum_squaredB);
+    double rmsC = rms(1000, sum_squaredC);
+    printf("RMS volt A; %f \nRMS volt B; %f \nRMS volt C; %f \n", rmsA, rmsB, rmsC);
+    rmsA = 200;
+    rmsB = 200;
+    rmsC = 300;
+    if (rmsA <= 207) {
+        printf("rmsA is too small\n");
+    }
+    if (rmsB <= 207) {
+        printf("rmsB is too small\n");
+    }
+    if (rmsC <= 207) {
+        printf("rmsC is too small\n");
+    }
+    if (253 <= rmsA) {
+        printf("rmsA is too too big\n");
+    }
+    if (253 <= rmsB) {
+        printf("rmsB is too big\n");
+    }
+    if (253 <= rmsC) {
+        printf("rmsC is too big\n");
+    }
 
 
 
 
-        return 0;
+    return 0;
+    }
 
-}
+
+
+
+
+
+
