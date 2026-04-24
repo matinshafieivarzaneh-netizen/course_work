@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <stdbool.h>
+
 #include "waveform.h"
 
 
@@ -94,8 +94,41 @@ fclose(pql);
     double pp_valueB = voltage_pB *2;
     double pp_valueC = voltage_pC *2;
     printf(" peak to peak value A: %lf \n peak to peak value B: %lf \n peak to peak value C: %lf \n", pp_valueA, pp_valueB, pp_valueC);
+    //calculating dc offset
+    double sumA = 0.0;
+    double sumB = 0.0;
+    double sumC = 0.0;
 
 
+    for (int i = 0; i <= 999; ++i) {
+        sumA += data[i].phaseA ;
+        sumB += data[i].phaseB ;
+        sumC += data[i].phaseC ;
+    }
+    double DC_offsetA = sumA / num_samples;
+    double DC_offsetB = sumB / num_samples;
+    double DC_offsetC = sumC / num_samples;
+    printf("DC offsetA: %lf \nDC offsetB: %lf \nDC offsetC: %lf \n", DC_offsetA, DC_offsetB, DC_offsetC);
+    // detecting clipping in phase A
+    for (int i = 0; i <= 999; ++i) {
+        if (sqrt(data[i].phaseA *data[i].phaseA) >= 324.9) {
+            printf("detected clipping at t = %lf ms in phase A \n", data[i].timestamp);
+        }
+    }
+    printf("\n\n\n");
+    //detecting clipping in phase B
+    for (int i = 0; i <= 999; ++i) {
+        if (sqrt(data[i].phaseB *data[i].phaseB) >= 324.9) {
+            printf("detected clipping at t = %lf ms in phase B \n", data[i].timestamp);
+        }
+    }
+    printf("\n\n\n");
+    //detecting clipping in phase C
+    for (int i = 0; i <= 999; ++i) {
+        if (sqrt(data[i].phaseC *data[i].phaseC) >= 324.9) {
+            printf("detected clipping at t = %lf ms in phase C \n", data[i].timestamp);
+        }
+    }
 
 
 
