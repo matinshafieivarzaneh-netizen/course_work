@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "io.h"
 #include "waveform.h"
 
 
@@ -47,7 +46,7 @@ int main(void) {
 
     }while (line < num_samples);
 fclose(pql);
-
+//reading file
 FILE *output = fopen("result.txt", "w");
 if (output == NULL) {
     printf("Error writing file\n");

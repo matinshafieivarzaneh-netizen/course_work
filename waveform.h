@@ -10,7 +10,7 @@ typedef struct{
     double thd_percent;
 } pql_data;
 
-double my_rms( int n, double sum);
+
 
 
 
