@@ -10,8 +10,18 @@
 #define COURSE_WORK_IO_H
 #ifndef io_h
 #define io_h
+typedef struct{
+    double timestamp;
+    double phaseA;
+    double phaseB;
+    double phaseC;
+    double line_current;
+    double frequency;
+    double power_factor;
+    double thd_percent;
+} pql_data;
 
-void processing_csv(const float *file_name);
+pql_data *processing_csv(char file_name[256]);
 
 #endif
 
