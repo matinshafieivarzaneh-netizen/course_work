@@ -47,6 +47,7 @@ pql_data *processing_csv(char file_name[256]) {
 
     }while (line < num_samples);
     fclose(pql);
+    
     return data;
 
 

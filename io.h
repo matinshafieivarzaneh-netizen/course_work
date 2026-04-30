@@ -23,11 +23,9 @@ typedef struct{
 
 pql_data *processing_csv(char file_name[256]);
 
+
+
+
+
 #endif
-
-
-
-
-
-
 #endif //COURSE_WORK_IO_H

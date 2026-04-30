@@ -14,7 +14,7 @@ int main(void) {
     pql_data *data = processing_csv(file_name);
 
 
-//reading file
+// file
 FILE *output = fopen("result.txt", "w");
 if (output == NULL) {
     printf("Error writing file\n");
@@ -92,14 +92,14 @@ if (output == NULL) {
     //detecting clipping in phase B
     for (int i = 0; i <= 999; ++i) {
         if (fabs(data[i].phaseB) >= 324.9) {
-            fprintf(output,"detected clipping at t = %.3lf ms in phase B \n", data[i].timestamp);
+            fprintf(output,"detected clipping at t = %.3lf s in phase B \n", data[i].timestamp);
         }
     }
     fprintf(output,"\n\n\n");
     //detecting clipping in phase C
     for (int i = 0; i <= 999; ++i) {
         if (fabs(data[i].phaseC) >= 324.9) {
-            fprintf(output,"detected clipping at t = %.3lf ms in phase C \n", data[i].timestamp);
+            fprintf(output,"detected clipping at t = %.3lf s in phase C \n", data[i].timestamp);
         }
     }
 
